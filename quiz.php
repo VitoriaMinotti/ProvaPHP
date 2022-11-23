@@ -23,27 +23,3 @@ $resultado = mysqli_query($conexao, $query);
     }
   ?>
 </div>
-
-<?php 
-if(isset($_GET["pergunta_id"]) && !empty($_GET["pergunta_id"]))
-{
-$pergunta_id = $_GET["pergunta_id"];
-$query = "select * from perguntas where id = $pergunta_id";
-$resultado = mysqli_query($conexao,$query);
-
-$pergunta = mysqli_fetch_array($resultado)["pergunta"];
-
-$query = "select * from alternativas where pergunta_id = ".$pergunta_id;
-$resultadoAlternativas = mysqli_query($conexao,$query);
-
-}
-else
-{
-  //  header("Location: perguntas.php");
-}
-
-  while($linha = mysqli_fetch_array($resultadoAlternativas))
-    {
-      echo "".$linha['alternativa']."<br>";
-    }
-?>
