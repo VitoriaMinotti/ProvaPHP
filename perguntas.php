@@ -19,7 +19,7 @@ $resultado = mysqli_query($conexao, $query);
       <br>
       <br>
       <button type="submit">Salvar</button>
-      <button type="button" href="quiz.php">Voltar</button>
+      <button><a href="." style="text-decoration:none; color: black">Voltar</a></button>
   </form>
 </div>
 

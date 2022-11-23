@@ -52,38 +52,37 @@ else
   //  header("Location: perguntas.php");
 }
 ?>
-<h1> <?php echo $pergunta; ?> </h1>
 
-<form action="alternativas.php?pergunta_id=<?php echo $_GET["pergunta_id"]; ?>" method="post" >
-    <input type="hidden" name="pergunta_id" value="<?php echo $_GET["pergunta_id"]; ?>"/>
-<input type="text" name="1"/>
-<input type="radio" name="correto" value="1">
-<br>
-<input type="text" name="2"/>
-<input type="radio" name="correto" value="2">
-<br>
-<input type="text" name="3"/>
-<input type="radio" name="correto" value="3">
-<br>
-<input type="text" name="4"/>
-<input type="radio" name="correto" value="4">
-<br>
-<input type="text" name="5"/>
-<input type="radio" name="correto" value="5">
-<br>
-<br>
-<button type="submit">
-    Salvar
-</button>
-
-</form>
+<div style="padding: 10px;" class="col-4 mt-5 bg-light border rounded container-fluid">
+  <h3> <?php echo $pergunta; ?> </h3>
+  <div class="center">
+    <form action="alternativas.php?pergunta_id=<?php echo $_GET["pergunta_id"]; ?>" method="post" >
+      <input type="hidden" name="pergunta_id" value="<?php echo $_GET["pergunta_id"]; ?>"/>
+      <input type="text" name="1"/>
+      <input type="radio" name="correto" value="1">
+      <br>
+      <input type="text" name="2"/>
+      <input type="radio" name="correto" value="2">
+      <br>
+      <input type="text" name="3"/>
+      <input type="radio" name="correto" value="3">
+      <br>
+      <input type="text" name="4"/>
+      <input type="radio" name="correto" value="4">
+      <br>
+      <input type="text" name="5"/>
+      <input type="radio" name="correto" value="5">
+      <br>
+      <br>
+      <button type="submit">Salvar</button>
+      <button><a href="." style="text-decoration:none; color: black">Voltar</a></button>
+    </form>
+  </div>
 
 <?php 
-
-while($linha = mysqli_fetch_array($resultadoAlternativas))
+  while($linha = mysqli_fetch_array($resultadoAlternativas))
     {
-      
-        echo "".$linha['alternativa']."<br>";
-      
-     }
-    ?>
+      echo "".$linha['alternativa']."<br>";
+    }
+?>
+</div>
