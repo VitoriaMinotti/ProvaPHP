@@ -3,19 +3,31 @@ include "conexao.php";
 include "header.php";
 
 if (isset($_POST) && !empty($_POST)) {
+    if (empty($_POST["1"]) || empty($_POST["2"]) || empty($_POST["3"]) || empty($_POST["4"]) || empty($_POST["5"])) {
+    ?>
+      <div class="alert alert-danger">
+        Preencha as alternativas.
+      </div>;
+    <?php
+      } else if (empty($_POST["correto"])) {
+    ?>
+      <div class="alert alert-danger">
+          Selecione a alternativa correta.
+      </div>;
+    <?php
+  } else {
     $alternativa1 = $_POST["1"];
     $alternativa2 = $_POST["2"];
     $alternativa3 = $_POST["3"];
     $alternativa4 = $_POST["4"];
     $alternativa5 = $_POST["5"];
+
     $radioCorreto = $_POST["correto"];
-
-    $correta1=0;
-    $correta2=0;
-    $correta3=0;
-    $correta4=0;
-    $correta5=0;
-
+            $correta1=0;
+            $correta2=0;
+            $correta3=0;
+            $correta4=0;
+            $correta5=0;
     switch ($radioCorreto) {
         case '1': $correta1=1; break;
         case '2': $correta2=1; break;
@@ -31,11 +43,10 @@ if (isset($_POST) && !empty($_POST)) {
     $valores3 = "('$alternativa3',$pergunta_id, $correta3)";
     $valores4 = "('$alternativa4',$pergunta_id, $correta4)";
     $valores5 = "('$alternativa5',$pergunta_id, $correta5)";
-
     $query = $query.$valores1.",".$valores2.",".$valores3.",".$valores4.",".$valores5;
    // echo $query;
    $resultado = mysqli_query($conexao, $query);
-}
+}}
 
 if(isset($_GET["pergunta_id"]) && !empty($_GET["pergunta_id"])){
   $pergunta_id = $_GET["pergunta_id"];
@@ -47,9 +58,7 @@ if(isset($_GET["pergunta_id"]) && !empty($_GET["pergunta_id"])){
   $query = "select * from alternativas where pergunta_id = ".$pergunta_id;
   $resultadoAlternativas = mysqli_query($conexao,$query);
 
-}
-else
-{
+} else{
   //  header("Location: perguntas.php");
 }
 ?>
@@ -69,44 +78,43 @@ else
           <input type="hidden" name="pergunta_id" value="<?php echo $_GET["pergunta_id"]; ?>"/>
 
           <div class="d-flex">
-            <input class="form-control border rounded container-fluid" type="text" name="1"/>
+            <input  class="form-control border rounded container-fluid" type="text" name="1"/>
             <input type="radio" name="correto" value="1">
           </div>
           <br>
 
           <div class="d-flex">
-            <input class="form-control border rounded container-fluid" type="text" name="1"/>
+            <input class="form-control border rounded container-fluid" type="text" name="2"/>
             <input type="radio" name="correto" value="2">
             <br>
           </div>
           <br>
 
           <div class="d-flex">
-            <input class="form-control border rounded container-fluid" type="text" name="1"/>
+            <input class="form-control border rounded container-fluid" type="text" name="3"/>
             <input type="radio" name="correto" value="3">
           </div>
           <br>
 
           <div class="d-flex">
-            <input class="form-control border rounded container-fluid" type="text" name="1"/>
+            <input  class="form-control border rounded container-fluid" type="text" name="4"/>
             <input type="radio" name="correto" value="4">
           </div>
           <br>
 
           <div class="d-flex">
-            <input class="form-control border rounded container-fluid" type="text" name="1"/>
+            <input class="form-control border rounded container-fluid" type="text" name="5"/>
             <input type="radio" name="correto" value="5">
           </div>
           <br>
 
           <div class="d-flex">
-            <button type="submit" class="btn btn-success">Salvar</button>
-            <button type="button" class="btn btn-warning"><a href="." style="text-decoration:none; color: white">Voltar</a></button>
+            <button type="submit" class="ms-3 btn btn-success">Salvar</button>
+            <button type="button" class="ms-3 btn btn-warning"><a href="perguntas.php" style="text-decoration:none; color: white">Voltar</a></button>
           </div>
           <br>
         </form>
       </div>
 </div>
 </body>
-
-
+</div>
