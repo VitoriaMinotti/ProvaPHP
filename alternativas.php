@@ -2,21 +2,7 @@
 include "conexao.php";
 include "header.php";
 
-if (isset($_POST) && !empty($_POST)){
-  if (empty($_POST["1"]) || empty($_POST["2"]) || empty($_POST["3"]) || empty($_POST["4"]) || empty($_POST["5"])) {
-?>
-      <div class="alert alert-danger">
-          O campo nome não pode estar vazio
-      </div>;
-  <?php
-  } else if (empty($_POST["correto"])) {
-  ?>
-      <div class="alert alert-danger">
-          O campo correto deve estar marcado
-      </div>;
-<?php
-  } else {
-
+if (isset($_POST) && !empty($_POST)) {
     $alternativa1 = $_POST["1"];
     $alternativa2 = $_POST["2"];
     $alternativa3 = $_POST["3"];
@@ -45,10 +31,11 @@ if (isset($_POST) && !empty($_POST)){
     $valores3 = "('$alternativa3',$pergunta_id, $correta3)";
     $valores4 = "('$alternativa4',$pergunta_id, $correta4)";
     $valores5 = "('$alternativa5',$pergunta_id, $correta5)";
+
     $query = $query.$valores1.",".$valores2.",".$valores3.",".$valores4.",".$valores5;
    // echo $query;
    $resultado = mysqli_query($conexao, $query);
-}}
+}
 
 if(isset($_GET["pergunta_id"]) && !empty($_GET["pergunta_id"])){
   $pergunta_id = $_GET["pergunta_id"];
@@ -113,18 +100,12 @@ else
           <br>
 
           <div class="d-flex">
-            <button type="submit" class="ms-3 btn btn-success">Salvar</button>
-            <button type="button" class="ms-5 btn btn-warning"><a href="." style="text-decoration:none; color: white">Voltar</a></button>
+            <button type="submit" class="btn btn-success">Salvar</button>
+            <button type="button" class="btn btn-warning"><a href="." style="text-decoration:none; color: white">Voltar</a></button>
           </div>
           <br>
         </form>
       </div>
-    <?php 
-    while($linha = mysqli_fetch_array($resultadoAlternativas))
-      {
-        echo "".$linha['alternativa']."<br>";
-      }
-    ?>
 </div>
 </body>
 

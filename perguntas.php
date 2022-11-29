@@ -11,38 +11,45 @@ if(isset($_POST) && !empty($_POST)){
 $query = "select * from perguntas";
 $resultado = mysqli_query($conexao, $query);
 ?>  
-<div style="padding: 10px;" class="col-9 mt-5 bg-light border rounded container-fluid">
-<h3 >Cadastre uma pergunta</h3>
-<br>
-  <form action="perguntas.php" method="post">
-      <input type="text" name="pergunta"/>
-      <br>
-      <br>
-      <button type="submit">Salvar</button>
-      <button><a href="." style="text-decoration:none; color: black">Voltar</a></button>
-  </form>
-</div>
 
-<div style="padding: 10px;" class="col-9 mt-5 bg-light border rounded d-flex container-fluid">
+<body style="background-color: #D8BFD8;">
+  <div class="col-7 mt-5 mx-auto bg-light border rounded container-fluid">
+    
+    <div class="mx-auto mt-3" style="width: 40%">
+      <h3 >Cadastro De Perguntas</h3>
+    </div>
 
-<table>
-<thead>
-    <tr>
-        <th>id</th>
-        <th>Pergunta</th>
-        <th></th>
-    </tr>
-</thead>
-<tbody>
-    <?php while($linha = mysqli_fetch_array($resultado))
-    {
-        echo "<tr style='border: 1px solid black'>";
-        echo "<td>".$linha['id']."</td>";
-        echo "<td>".$linha['pergunta']."</td>";
-        echo "<td> <a href='./alternativas.php?pergunta_id=".$linha['id']." '>Lista de Alternativas </a> </td>";
-        echo "</tr>";
-     }
-    ?>
-</tbody>
-</table>
+      <form class="table table-hover table-striped mx-auto mt-3" style="width: 65%" action="perguntas.php" method="post">
+        <div>Digite aqui a sua pergunta:</div>
+        <input class="form-control" type="text" name="pergunta"/>
+        <br>
+        
+        <div class="d-flex">
+            <button type="submit" class="btn btn-success">Salvar</button>
+          </div>
+          <br>
+      </form>
+
+    <table class="table table-hover table-striped mx-auto" style="width: 65%">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Pergunta</th>
+          <th></th>
+        </tr>
+      </thead>
+
+    <tbody>
+      <?php while($linha = mysqli_fetch_array($resultado))
+      {
+          echo "<tr>";
+          echo "<td>".$linha['id']."</td>";
+          echo "<td>".$linha['pergunta']."</td>";
+          echo"<td><button type='button' class='ms-5 btn btn-warning'><a href='./alternativas.php?pergunta_id=".$linha['id']." 'style='text-decoration:none; color: white'>Alternativas</a></button></td>";
+          echo "</tr>";
+      }
+      ?>
+    </tbody>
+    </table>
 </div>
+</body>
