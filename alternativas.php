@@ -2,19 +2,34 @@
 include "conexao.php";
 include "header.php";
 
-if(isset($_POST) && !empty($_POST)){
+if (isset($_POST) && !empty($_POST)){
+  if (empty($_POST["1"]) || empty($_POST["2"]) || empty($_POST["3"]) || empty($_POST["4"]) || empty($_POST["5"])) {
+?>
+      <div class="alert alert-danger">
+          O campo nome não pode estar vazio
+      </div>;
+  <?php
+  } else if (empty($_POST["correto"])) {
+  ?>
+      <div class="alert alert-danger">
+          O campo correto deve estar marcado
+      </div>;
+<?php
+  } else {
+
     $alternativa1 = $_POST["1"];
     $alternativa2 = $_POST["2"];
     $alternativa3 = $_POST["3"];
     $alternativa4 = $_POST["4"];
     $alternativa5 = $_POST["5"];
-
     $radioCorreto = $_POST["correto"];
-            $correta1=0;
-            $correta2=0;
-            $correta3=0;
-            $correta4=0;
-            $correta5=0;
+
+    $correta1=0;
+    $correta2=0;
+    $correta3=0;
+    $correta4=0;
+    $correta5=0;
+
     switch ($radioCorreto) {
         case '1': $correta1=1; break;
         case '2': $correta2=1; break;
@@ -33,18 +48,17 @@ if(isset($_POST) && !empty($_POST)){
     $query = $query.$valores1.",".$valores2.",".$valores3.",".$valores4.",".$valores5;
    // echo $query;
    $resultado = mysqli_query($conexao, $query);
-}
+}}
 
-if(isset($_GET["pergunta_id"]) && !empty($_GET["pergunta_id"]))
-{
-$pergunta_id = $_GET["pergunta_id"];
-$query = "select * from perguntas where id = $pergunta_id";
-$resultado = mysqli_query($conexao,$query);
+if(isset($_GET["pergunta_id"]) && !empty($_GET["pergunta_id"])){
+  $pergunta_id = $_GET["pergunta_id"];
+  $query = "select * from perguntas where id = $pergunta_id";
+  $resultado = mysqli_query($conexao,$query);
 
-$pergunta = mysqli_fetch_array($resultado)["pergunta"];
+  $pergunta = mysqli_fetch_array($resultado)["pergunta"];
 
-$query = "select * from alternativas where pergunta_id = ".$pergunta_id;
-$resultadoAlternativas = mysqli_query($conexao,$query);
+  $query = "select * from alternativas where pergunta_id = ".$pergunta_id;
+  $resultadoAlternativas = mysqli_query($conexao,$query);
 
 }
 else
@@ -53,36 +67,65 @@ else
 }
 ?>
 
-<div style="padding: 10px;" class="col-4 mt-5 bg-light border rounded container-fluid">
-  <h3> <?php echo $pergunta; ?> </h3>
-  <div class="center">
-    <form action="alternativas.php?pergunta_id=<?php echo $_GET["pergunta_id"]; ?>" method="post" >
-      <input type="hidden" name="pergunta_id" value="<?php echo $_GET["pergunta_id"]; ?>"/>
-      <input type="text" name="1"/>
-      <input type="radio" name="correto" value="1">
-      <br>
-      <input type="text" name="2"/>
-      <input type="radio" name="correto" value="2">
-      <br>
-      <input type="text" name="3"/>
-      <input type="radio" name="correto" value="3">
-      <br>
-      <input type="text" name="4"/>
-      <input type="radio" name="correto" value="4">
-      <br>
-      <input type="text" name="5"/>
-      <input type="radio" name="correto" value="5">
-      <br>
-      <br>
-      <button type="submit">Salvar</button>
-      <button><a href="." style="text-decoration:none; color: black">Voltar</a></button>
-    </form>
-  </div>
+<body style="background-color: #D8BFD8;">
+  <div class="col-5 mt-5 mx-auto bg-light border rounded container-fluid">
+    
+    <div class="mx-auto mt-3" style="width: 60%">
+      <h5> <?php echo $pergunta; ?> </h5>
+    </div>
 
-<?php 
-  while($linha = mysqli_fetch_array($resultadoAlternativas))
-    {
-      echo "".$linha['alternativa']."<br>";
-    }
-?>
+    <div class="mx-auto mt-3" style="width: 60%">
+      <p>Digite as alternativas e selecione a correta.</p>
+    </div>
+
+        <form class="mx-auto mt-3" style="width: 40%" action="alternativas.php?pergunta_id=<?php echo $_GET["pergunta_id"]; ?>" method="post" >
+          <input type="hidden" name="pergunta_id" value="<?php echo $_GET["pergunta_id"]; ?>"/>
+
+          <div class="d-flex">
+            <input class="form-control border rounded container-fluid" type="text" name="1"/>
+            <input type="radio" name="correto" value="1">
+          </div>
+          <br>
+
+          <div class="d-flex">
+            <input class="form-control border rounded container-fluid" type="text" name="1"/>
+            <input type="radio" name="correto" value="2">
+            <br>
+          </div>
+          <br>
+
+          <div class="d-flex">
+            <input class="form-control border rounded container-fluid" type="text" name="1"/>
+            <input type="radio" name="correto" value="3">
+          </div>
+          <br>
+
+          <div class="d-flex">
+            <input class="form-control border rounded container-fluid" type="text" name="1"/>
+            <input type="radio" name="correto" value="4">
+          </div>
+          <br>
+
+          <div class="d-flex">
+            <input class="form-control border rounded container-fluid" type="text" name="1"/>
+            <input type="radio" name="correto" value="5">
+          </div>
+          <br>
+
+          <div class="d-flex">
+            <button type="submit" class="ms-3 btn btn-success">Salvar</button>
+            <button type="button" class="ms-5 btn btn-warning"><a href="." style="text-decoration:none; color: white">Voltar</a></button>
+          </div>
+          <br>
+        </form>
+      </div>
+    <?php 
+    while($linha = mysqli_fetch_array($resultadoAlternativas))
+      {
+        echo "".$linha['alternativa']."<br>";
+      }
+    ?>
 </div>
+</body>
+
+

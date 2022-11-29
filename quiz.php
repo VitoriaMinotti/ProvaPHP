@@ -2,13 +2,9 @@
 include "conexao.php";
 include "header.php";
 
-
 $query = "select * from perguntas";
 $resultado = mysqli_query($conexao, $query);
-
-
 ?>  
-
 
 <div style="padding: 10px;" class="col-9 mt-5 bg-light border rounded container-fluid">
 <h3 >Responda</h3>
