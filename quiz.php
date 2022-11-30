@@ -44,8 +44,5 @@ $resultado = mysqli_query($conexao, $query);
     <?php
     echo "</form>";
   ?>
-
 </div>
 </body>
-
-
