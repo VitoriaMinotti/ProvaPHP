@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30-Nov-2022 às 01:10
+-- Tempo de geração: 01-Dez-2022 às 18:22
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.1.12
 
@@ -90,6 +90,33 @@ INSERT INTO `alternativas` (`id`, `alternativa`, `pergunta_id`, `correta`) VALUE
 (144, '10', 10, 0),
 (145, '2', 10, 0);
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `perguntas`
+--
+
+CREATE TABLE `perguntas` (
+  `id` int(11) NOT NULL,
+  `pergunta` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `perguntas`
+--
+
+INSERT INTO `perguntas` (`id`, `pergunta`) VALUES
+(1, 'Em qual estado Pelé marcou seu milésimo gol?'),
+(2, 'Que rio corta a cidade de Londres, na Inglaterra?'),
+(3, 'No filme, quem era parceiro de crime de Bonnie?'),
+(4, 'Qual a moeda oficial da Alemanha?'),
+(5, 'Nas histórias do Snoopy, qual é o nome do passarinho?'),
+(6, 'Em que estado norte-americano fica a cidade de Miami?'),
+(7, 'Em que país fica a grande muralha com cerca de 6.400 quilômetros?'),
+(8, 'Quantos ossos tem o corpo humano?'),
+(9, 'Qual é a capital dos Estados Unidos? '),
+(10, 'Quantas vezes o Brasil foi campeão da copa do mundo?');
+
 --
 -- Índices para tabelas despejadas
 --
@@ -101,6 +128,12 @@ ALTER TABLE `alternativas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `perguntas`
+--
+ALTER TABLE `perguntas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
@@ -109,6 +142,12 @@ ALTER TABLE `alternativas`
 --
 ALTER TABLE `alternativas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+
+--
+-- AUTO_INCREMENT de tabela `perguntas`
+--
+ALTER TABLE `perguntas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
